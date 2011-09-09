@@ -1,13 +1,13 @@
-[ vim-fdc ]
+#vim-fdc#
 
 This is some scripts to better enable working with Force.com from within vim.
 
-[[ file types ]]
+##file types##
 
 Apex files are configured to automatically syntax highlight as java.
 Visualforce pages are configured to syntax hightlight as html.
 
-[[ ant support ]]
+##ant support##
 
 I have included an ant script for deploying and retrieving files.
 
@@ -22,7 +22,7 @@ In normal mode:
 Note: The script assumes build.xml resides in a build folder below your project root.
 
 
-[[ setup ]]
+##setup##
 
 * Copy the "ftdetect" folder go in your ~/.vim folder.
 * Copy the "build" folder into the root of your project folder.
