@@ -15,9 +15,12 @@ Within vim, cd to the root of your project.
 
 In normal mode:
 
-:make deploy      #this will deploy the currently open file to your org.
-:make deployAll   #this will overwrite everything in your org with what is in your project folder.
-:make retrieveAll #this will overwrite everything in your project folder with what is in your org.
+:make deploy
+: this will deploy the currently open file to your org.
+:make deployAll
+: this will overwrite everything in your org with what is in your project folder.
+:make retrieveAll
+: this will overwrite everything in your project folder with what is in your org.
 
 Note: The script assumes build.xml resides in a build folder below your project root.
 
