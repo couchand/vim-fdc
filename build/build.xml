@@ -1,0 +1,55 @@
+<project name="Salesforce Ant tasks" default="describeMetadata" basedir="../" xmlns:sf="antlib:com.salesforce">
+    <!-- Note that basedir above is one back cuz we are in build dir -->
+
+    <!-- load shell environment -->
+    <property environment="ENV" />
+
+    <property file="${basedir}/build/build.properties"/>
+
+    <!-- WARNING - this overwrites everything in your org with what you have in your local project -->
+    <target name="deployAll">
+        <!-- Deploy a zip of metadata files to the org -->
+        <delete file="${basedir}/deploy.zip"/>
+
+         <zip destfile="${basedir}/deploy.zip">
+            <zipfileset dir="${basedir}/classes" prefix="classes"/>
+            <zipfileset dir="${basedir}/pages" prefix="pages" />
+            <zipfileset dir="${basedir}/staticresources" prefix="staticresources" />
+            <fileset dir="${basedir}" includes="package.xml"/>
+        </zip>
+
+        <sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" zipFile="${basedir}/deploy.zip" pollWaitMillis="1000"/>
+
+    </target>
+
+    <target name="deploy">
+        <!-- Deploy a single file (packaged in deploy.zip) to the org -->
+        <delete file="${basedir}/deploy.zip"/>
+
+         <zip destfile="${basedir}/deploy.zip" >
+            <zipfileset dir="${basedir}/classes" prefix="classes" >
+                 <filename name="**/${fileNoExt}.*"/>
+            </zipfileset>
+            <zipfileset dir="${basedir}/pages" prefix="pages" >
+                 <filename name="**/${fileNoExt}.*"/>
+            </zipfileset>
+            <zipfileset dir="${basedir}/staticresources" prefix="staticresources" >
+                <filename name="**/${fileNoExt}.*"/>
+            </zipfileset>
+            <fileset dir="${basedir}" includes="package.xml"/>
+        </zip>
+
+        <sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" zipFile="${basedir}/deploy.zip" pollWaitMillis="1000"/>
+    </target>
+
+    <target name="retrieveAll">
+       <!-- Retrieve the contents listed in the file package.xml into the base directory -->
+       <sf:retrieve username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" retrieveTarget="${basedir}" unpackaged="package.xml"/>
+     </target>
+
+	<!-- Retrieve the information on all supported metadata type -->
+    <target name="describeMetadata">
+      <sf:describeMetadata username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}"/>
+    </target>
+
+</project>
