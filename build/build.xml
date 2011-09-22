@@ -15,6 +15,7 @@
             <zipfileset dir="${basedir}/classes" prefix="classes"/>
             <zipfileset dir="${basedir}/pages" prefix="pages" />
             <zipfileset dir="${basedir}/staticresources" prefix="staticresources" />
+             <zipfileset dir="${basedir}/triggers" prefix="triggers" />
             <fileset dir="${basedir}" includes="package.xml"/>
         </zip>
 
@@ -34,6 +35,9 @@
                  <filename name="**/${fileNoExt}.*"/>
             </zipfileset>
             <zipfileset dir="${basedir}/staticresources" prefix="staticresources" >
+                <filename name="**/${fileNoExt}.*"/>
+            </zipfileset>
+              <zipfileset dir="${basedir}/triggers" prefix="triggers" >
                 <filename name="**/${fileNoExt}.*"/>
             </zipfileset>
             <fileset dir="${basedir}" includes="package.xml"/>
