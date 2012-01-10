@@ -12,11 +12,11 @@
         <delete file="${basedir}/deploy.zip"/>
 
          <zip destfile="${basedir}/deploy.zip">
-            <zipfileset dir="${basedir}/classes" prefix="classes"/>
-            <zipfileset dir="${basedir}/pages" prefix="pages" />
-            <zipfileset dir="${basedir}/staticresources" prefix="staticresources" />
-             <zipfileset dir="${basedir}/triggers" prefix="triggers" />
-            <fileset dir="${basedir}" includes="package.xml"/>
+            <zipfileset dir="${basedir}/src/classes" prefix="classes"/>
+            <zipfileset dir="${basedir}/src/pages" prefix="pages" />
+            <zipfileset dir="${basedir}/src/staticresources" prefix="staticresources" />
+             <zipfileset dir="${basedir}/src/triggers" prefix="triggers" />
+            <fileset dir="${basedir}/src/" includes="package.xml"/>
         </zip>
 
         <sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" zipFile="${basedir}/deploy.zip" pollWaitMillis="1000"/>
@@ -28,27 +28,27 @@
         <delete file="${basedir}/deploy.zip"/>
 
          <zip destfile="${basedir}/deploy.zip" >
-            <zipfileset dir="${basedir}/classes" prefix="classes" >
+            <zipfileset dir="${basedir}/src/classes" prefix="classes" >
                  <filename name="**/${fileNoExt}.*"/>
             </zipfileset>
-            <zipfileset dir="${basedir}/pages" prefix="pages" >
+            <zipfileset dir="${basedir}/src/pages" prefix="pages" >
                  <filename name="**/${fileNoExt}.*"/>
             </zipfileset>
-            <zipfileset dir="${basedir}/staticresources" prefix="staticresources" >
+            <zipfileset dir="${basedir}/src/staticresources" prefix="staticresources" >
                 <filename name="**/${fileNoExt}.*"/>
             </zipfileset>
-              <zipfileset dir="${basedir}/triggers" prefix="triggers" >
+              <zipfileset dir="${basedir}/src/triggers" prefix="triggers" >
                 <filename name="**/${fileNoExt}.*"/>
             </zipfileset>
-            <fileset dir="${basedir}" includes="package.xml"/>
+            <fileset dir="${basedir}/src/" includes="package.xml"/>
         </zip>
 
         <sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" zipFile="${basedir}/deploy.zip" pollWaitMillis="1000"/>
     </target>
 
     <target name="retrieveAll">
-       <!-- Retrieve the contents listed in the file package.xml into the base directory -->
-       <sf:retrieve username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" retrieveTarget="${basedir}" unpackaged="package.xml"/>
+       <!-- Retrieve the contents listed in the file package.xml into the src directory -->
+       <sf:retrieve username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" retrieveTarget="${basedir}/src/" unpackaged="src/package.xml"/>
      </target>
 
 	<!-- Retrieve the information on all supported metadata type -->
